@@ -6,7 +6,7 @@ from constants import *
 class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)  # Initialize with the position and radius
-        rotation = 0
+        self.rotation = 0
 
 
     # in the player class
@@ -22,4 +22,4 @@ class Player(CircleShape):
     def draw(self, screen):
         # Draw the player as a triangle
         points = self.triangle()
-        pygame.draw.polygon(screen, (255, 255, 255), points) 
+        pygame.draw.polygon(screen, (255, 255, 255), points, width=2) 
