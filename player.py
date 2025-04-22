@@ -9,6 +9,7 @@ class Player(CircleShape):
         super().__init__(x, y, PLAYER_RADIUS)  # Initialize with the position and radius
         self.rotation = 0
         self.shoot_timer = 0
+        self.triple_timer = 0
 
 
     # in the player class
@@ -43,6 +44,7 @@ class Player(CircleShape):
         if keys[pygame.K_SPACE]:
             self.shoot()
         self.shoot_timer -= dt
+        self.triple_timer -= dt
 
     def move(self, dt):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
