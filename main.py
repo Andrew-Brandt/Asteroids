@@ -4,6 +4,7 @@ from player import *
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
 from circleshape import CircleShape
+from shot import Shot
 
 
 
@@ -17,9 +18,11 @@ def main():
 	updatable_group = pygame.sprite.Group()
 	drawable_group = pygame.sprite.Group() 
 	asteroid_group = pygame.sprite.Group()
+	shot_group = pygame.sprite.Group()
 	Player.containers = (updatable_group, drawable_group)
 	Asteroid.containers = (updatable_group, drawable_group, asteroid_group)
 	AsteroidField.containers = (updatable_group)
+	Shot.containers = (shot_group, updatable_group, drawable_group)
 	asteroid_field = AsteroidField()
 	player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
