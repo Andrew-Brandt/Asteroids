@@ -26,6 +26,7 @@ def main():
 	asteroid_field = AsteroidField()
 	player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+	score = 0
 
 
 	
@@ -40,12 +41,16 @@ def main():
 
 
 		updatable_group.update(dt) 
-		for asteroid in asteroid_group:
+		for asteroid in list(asteroid_group):
 			if asteroid.get_collision(player):
-				raise SystemExit("Game over!")
+				
+				raise SystemExit(f"Game Over! Score: {score}")
+
+		for asteroid in list(asteroid_group):	
 			for shot in shot_group:
 				if asteroid.get_collision(shot):
-					asteroid.kill()
+					score += 1
+					asteroid.split()
 					shot.kill()
 			
 		
