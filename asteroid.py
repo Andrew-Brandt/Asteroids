@@ -2,6 +2,7 @@ import pygame
 from circleshape import CircleShape
 from constants import *
 import random
+from particle import Particle
 
 class Asteroid(CircleShape):
     def __init__(self, x, y, radius):
@@ -20,7 +21,7 @@ class Asteroid(CircleShape):
 
     def split(self):
         self.kill()
-
+        self.spawn_particles()
         if self.radius <= ASTEROID_MIN_RADIUS:
             return
         else:
@@ -43,3 +44,10 @@ class Asteroid(CircleShape):
 
 
 
+    def spawn_particles(self):
+        for _ in range(20):
+            angle = random.uniform(0, 360)
+            speed = random.uniform(50, 200)
+            vel = pygame.Vector2(1, 0).rotate(angle) * speed
+            color = (255, 255, 255)
+            Particle(self.position, vel, color, lifetime=2.0)
