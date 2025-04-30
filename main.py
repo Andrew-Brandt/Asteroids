@@ -22,9 +22,9 @@ def main():
 
     # Register containers
     Particle.containers = (updatable_group, drawable_group)
-    Player.containers = (drawable_group,)  # ❗ Not in updatable_group
+    Player.containers = (drawable_group,) 
     Asteroid.containers = (updatable_group, drawable_group, asteroid_group)
-    AsteroidField.containers = (updatable_group,)
+   
     Shot.containers = (shot_group, updatable_group, drawable_group)
 
     # Game objects
@@ -56,7 +56,11 @@ def main():
                 return
 
         # Update game objects
-        updatable_group.update(dt)
+        for sprite in updatable_group:
+            if isinstance(sprite, Asteroid):
+                sprite.update(dt, player)
+            else:
+                sprite.update(dt)
 
         # Manually update player so we can pass camera
         shot = player.update(dt, camera)
@@ -65,6 +69,7 @@ def main():
 
         # Update camera after movement
         camera.update(player)
+        asteroid_field.update(dt, camera)
 
         # Collision: Asteroids vs Player
         for asteroid in list(asteroid_group):
