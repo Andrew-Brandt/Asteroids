@@ -12,8 +12,10 @@ class Asteroid(CircleShape):
         self.radius = radius
         
 
-    def draw(self, screen):
-        pygame.draw.circle(screen, (255, 255, 255), (int(self.position.x), int(self.position.y)), self.radius, width=2)
+    def draw(self, screen, camera):
+        screen_pos = camera.apply(self.position)
+        pygame.draw.circle(screen, (255, 255, 255), (int(screen_pos.x), int(screen_pos.y)), self.radius, width=2)
+
 
     def update(self, dt):
         # Update the position of the asteroid based on its velocity

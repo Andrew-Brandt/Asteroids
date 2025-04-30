@@ -18,9 +18,14 @@ class Particle(pygame.sprite.Sprite):
         if self.age > self.lifetime:
             self.kill()
 
-    def draw(self, screen):
+    def draw(self, screen, camera):
         alpha = max(0, 255 * (1 - self.age / self.lifetime))
         surface = pygame.Surface((2, 2), pygame.SRCALPHA)
         pygame.draw.circle(surface, (255, 255, 255, int(alpha)), (1, 1), 1)
-        screen.blit(surface, (self.position.x - 1, self.position.y - 1))
+
+        # Apply camera to position
+        screen_pos = camera.apply(self.position)
+
+        screen.blit(surface, (screen_pos.x - 1, screen_pos.y - 1))
+
 
